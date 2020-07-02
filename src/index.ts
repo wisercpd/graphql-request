@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch'
-import { ClientError, GraphQLError, Variables } from './types'
+import { ClientError, GraphQLError, Variables, Extensions } from './types'
 import { Request, RequestInit, Response } from './types.dom'
 
 export { ClientError } from './types'
@@ -15,7 +15,8 @@ export class GraphQLClient {
 
   async rawRequest<T = any>(
     query: string,
-    variables?: Variables
+    variables?: Variables,
+    extensions?: Extensions
   ): Promise<{
     data?: T
     extensions?: any
@@ -28,6 +29,7 @@ export class GraphQLClient {
     const body = JSON.stringify({
       query,
       variables: variables ? variables : undefined,
+      extensions: extensions ? extensions : undefined,
     })
 
     const response = await fetch(this.url, {

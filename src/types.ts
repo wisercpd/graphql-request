@@ -1,4 +1,5 @@
 export type Variables = { [key: string]: any }
+export type Extensions = { [key: string]: any }
 
 export interface GraphQLError {
   message: string
